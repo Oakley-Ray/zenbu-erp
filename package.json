@@ -1,0 +1,50 @@
+{
+  "name": "layerframe-ops",
+  "version": "0.1.0",
+  "private": true,
+  "description": "白牌企業營運系統 — ERP、國際物流、電商、數據分析",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "typecheck": "turbo typecheck",
+    "clean": "turbo clean && rm -rf node_modules"
+  },
+  "author": "Cengyu Design",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^25.5.2",
+    "@types/pg": "^8.20.0",
+    "ts-node": "^10.9.2",
+    "turbo": "^2.9.3",
+    "typescript": "^6.0.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nestjs/core",
+      "bcrypt",
+      "unrs-resolver",
+      "esbuild"
+    ],
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": "19",
+        "react-dom": "19",
+        "@types/react": "19",
+        "@types/react-dom": "19"
+      }
+    }
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "pg": "^8.20.0",
+    "playwright": "^1.59.1"
+  }
+}

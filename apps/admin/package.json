@@ -1,0 +1,35 @@
+{
+  "name": "@layerframe/admin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@layerframe/api-client": "workspace:*",
+    "@layerframe/shared-types": "workspace:*",
+    "@refinedev/cli": "^2.16.0",
+    "@refinedev/core": "^4.56.0",
+    "@refinedev/react-router": "^1.0.0",
+    "@refinedev/simple-rest": "^5.0.0",
+    "@tanstack/react-query": "^5.60.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
+  }
+}

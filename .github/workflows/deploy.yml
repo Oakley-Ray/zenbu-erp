@@ -1,0 +1,35 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -f apps/backend/Dockerfile \
+            -t layerframe-backend:${{ github.sha }} \
+            -t layerframe-backend:latest \
+            .
+
+      # TODO: 正式環境部署步驟
+      # 選項 1: 推到 Docker Registry（GitHub Container Registry / Docker Hub）
+      # 選項 2: 直接部署到 VPS（SSH + docker compose pull）
+      # 選項 3: 部署到 Cloud Run / ECS / Fly.io
+      #
+      # 範例（推到 GitHub Container Registry）：
+      # - name: Login to GHCR
+      #   run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      #
+      # - name: Push image
+      #   run: |
+      #     docker tag layerframe-backend:latest ghcr.io/${{ github.repository }}/backend:latest
+      #     docker push ghcr.io/${{ github.repository }}/backend:latest
+
+      - name: Deploy placeholder
+        run: echo "✅ Docker image built successfully. Configure deployment target in this workflow."
