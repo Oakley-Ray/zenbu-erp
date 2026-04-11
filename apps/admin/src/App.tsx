@@ -21,6 +21,11 @@ import { PaymentConfigPage } from './pages/payments/PaymentConfig';
 import { UserListPage } from './pages/users/UserList';
 import { UserFormPage } from './pages/users/UserForm';
 
+// Project Pages
+import { ProjectListPage } from './pages/project/ProjectList';
+import { ProjectFormPage } from './pages/project/ProjectForm';
+import { ProjectDetailPage } from './pages/project/ProjectDetail';
+
 // Procurement Pages
 import { SupplierListPage } from './pages/procurement/suppliers/SupplierList';
 import { SupplierFormPage } from './pages/procurement/suppliers/SupplierForm';
@@ -54,6 +59,8 @@ function App() {
           { name: 'goods-receipts', list: '/procurement/goods-receipts', create: '/procurement/goods-receipts/create' },
           { name: 'rfq', list: '/procurement/rfq', create: '/procurement/rfq/create', show: '/procurement/rfq/:id' },
           { name: 'returns', list: '/procurement/returns' },
+          // 專案管理
+          { name: 'projects', list: '/project', create: '/project/create', show: '/project/:id', edit: '/project/edit/:id' },
           // 物流與金流
           { name: 'logistics', list: '/logistics', create: '/logistics/create' },
           { name: 'transactions', list: '/payments/transactions' },
@@ -106,6 +113,12 @@ function App() {
             <Route path="procurement/rfq" element={<RfqListPage />} />
             <Route path="procurement/rfq/create" element={<RfqFormPage />} />
             <Route path="procurement/rfq/:id" element={<RfqDetailPage />} />
+
+            {/* 專案管理 */}
+            <Route path="project" element={<ProjectListPage />} />
+            <Route path="project/create" element={<ProjectFormPage />} />
+            <Route path="project/edit/:id" element={<ProjectFormPage />} />
+            <Route path="project/:id" element={<ProjectDetailPage />} />
 
             {/* 物流報價 */}
             <Route path="logistics" element={<QuoteListPage />} />

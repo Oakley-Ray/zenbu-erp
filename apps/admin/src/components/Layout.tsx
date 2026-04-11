@@ -3,6 +3,7 @@ import { useState, useMemo } from 'react';
 import { useLogout, useGetIdentity } from '@refinedev/core';
 import { Link, useLocation } from 'react-router';
 import { ROLE_LABELS } from '@/hooks/useRole';
+import { NotificationBell } from './NotificationBell';
 
 interface NavItem {
   to: string;
@@ -52,6 +53,12 @@ const ALL_NAV_SECTIONS: NavSection[] = [
       { to: '/procurement/purchase-orders', label: '採購訂單', roles: ['super_admin', 'admin', 'procurement'] },
       { to: '/procurement/goods-receipts', label: '收貨管理', roles: ['super_admin', 'admin', 'procurement', 'warehouse'] },
       { to: '/procurement/returns', label: '退貨/索賠', roles: ['super_admin', 'admin', 'procurement', 'finance'] },
+    ],
+  },
+  {
+    title: '專案管理',
+    items: [
+      { to: '/project', label: '專案總覽', roles: ['super_admin', 'admin', 'project_manager'] },
     ],
   },
   {
@@ -157,6 +164,11 @@ export function Layout({ children }: { children: ReactNode }) {
         </nav>
 
         <div className="px-3 py-3 border-t border-gray-200">
+          {!collapsed && (
+            <div className="flex items-center justify-between mb-2">
+              <NotificationBell />
+            </div>
+          )}
           {!collapsed ? (
             <>
               <div className="text-sm text-gray-600 mb-2 truncate">

@@ -12,6 +12,9 @@ import { LogisticsModule } from './modules/logistics/logistics.module';
 import { EcommerceModule } from './modules/ecommerce/ecommerce.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { PaymentModule } from './modules/payment/payment.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
+import { UploadsModule } from './modules/uploads/uploads.module';
+import { RealtimeModule } from './modules/realtime/realtime.module';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 import { RolesGuard } from './common/guards/roles.guard';
 import { AuditInterceptor } from './common/interceptors/audit.interceptor';
@@ -40,6 +43,9 @@ import { HealthController } from './health.controller';
     EcommerceModule,
     AnalyticsModule,
     PaymentModule,
+    NotificationsModule,
+    UploadsModule,
+    RealtimeModule,
   ],
   controllers: [HealthController],
   providers: [

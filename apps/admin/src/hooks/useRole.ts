@@ -9,6 +9,7 @@ export const ROLE_LABELS: Record<string, string> = {
   sales: '業務人員',
   finance: '財務人員',
   procurement: '採購人員',
+  project_manager: '專案經理',
   viewer: '檢視者',
   customer: '顧客',
 };
@@ -22,6 +23,7 @@ export const ROLE_VARIANTS: Record<string, 'success' | 'info' | 'warning' | 'neu
   sales: 'success',
   finance: 'info',
   procurement: 'warning',
+  project_manager: 'info',
   viewer: 'neutral',
   customer: 'neutral',
 };
@@ -34,6 +36,7 @@ export const ASSIGNABLE_ROLES = [
   'sales',
   'finance',
   'procurement',
+  'project_manager',
   'viewer',
 ] as const;
 

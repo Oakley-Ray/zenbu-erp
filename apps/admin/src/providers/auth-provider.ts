@@ -28,6 +28,14 @@ export const authProvider: AuthProvider = {
       localStorage.setItem('access_token', data.accessToken);
       localStorage.setItem('refresh_token', data.refreshToken);
 
+      // 從 JWT 解析 tenantId，確保 localStorage 一致
+      try {
+        const payload = JSON.parse(atob(data.accessToken.split('.')[1]!));
+        if (payload.tenantId) {
+          localStorage.setItem('tenant_id', payload.tenantId);
+        }
+      } catch {}
+
       return { success: true, redirectTo: '/' };
     } catch {
       return { success: false, error: { message: '網路錯誤', name: 'NetworkError' } };

@@ -11,6 +11,7 @@ export enum TenantRole {
   SALES = 'sales',
   FINANCE = 'finance',
   PROCUREMENT = 'procurement',
+  PROJECT_MANAGER = 'project_manager',
   VIEWER = 'viewer',
   CUSTOMER = 'customer',
 }
@@ -162,4 +163,46 @@ export enum GoodsReceiptStatus {
   INSPECTING = 'inspecting',
   COMPLETED = 'completed',
   REJECTED = 'rejected',
+}
+
+// ─── 專案管理 (Project) ───
+
+/** 專案狀態機 */
+export enum ProjectStatus {
+  PLANNING = 'planning',
+  ACTIVE = 'active',
+  ON_HOLD = 'on_hold',
+  COMPLETED = 'completed',
+  CANCELLED = 'cancelled',
+}
+
+/** WBS 任務狀態 */
+export enum TaskStatus {
+  NOT_STARTED = 'not_started',
+  IN_PROGRESS = 'in_progress',
+  COMPLETED = 'completed',
+  CANCELLED = 'cancelled',
+}
+
+/** 資源類型 */
+export enum ResourceType {
+  PERSONNEL = 'personnel',
+  EQUIPMENT = 'equipment',
+  MATERIAL = 'material',
+}
+
+/** 里程碑狀態 */
+export enum MilestoneStatus {
+  PENDING = 'pending',
+  ACHIEVED = 'achieved',
+  MISSED = 'missed',
+  CANCELLED = 'cancelled',
+}
+
+/** 專案成本分類 */
+export enum CostCategory {
+  LABOR = 'labor',
+  MATERIAL = 'material',
+  EQUIPMENT = 'equipment',
+  OTHER = 'other',
 }
