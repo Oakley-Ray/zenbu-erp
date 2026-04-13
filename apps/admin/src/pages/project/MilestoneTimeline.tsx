@@ -19,11 +19,11 @@ const STATUS_LABEL: Record<string, string> = {
   cancelled: '已取消',
 };
 
-const STATUS_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'error' | 'default'> = {
+const STATUS_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'danger' | 'neutral'> = {
   pending: 'info',
   achieved: 'success',
-  missed: 'error',
-  cancelled: 'default',
+  missed: 'danger',
+  cancelled: 'neutral',
 };
 
 const inputClass = 'w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500';
@@ -148,7 +148,7 @@ export function MilestoneTimeline({ projectId }: { projectId: string }) {
                       <div>
                         <div className="flex items-center gap-2">
                           <h4 className="font-medium text-gray-900">{m.name}</h4>
-                          <Badge variant={isOverdue ? 'error' : STATUS_VARIANT[m.status] ?? 'default'}>
+                          <Badge variant={isOverdue ? 'danger' : STATUS_VARIANT[m.status] ?? 'neutral'}>
                             {isOverdue ? '已逾期' : STATUS_LABEL[m.status] ?? m.status}
                           </Badge>
                         </div>

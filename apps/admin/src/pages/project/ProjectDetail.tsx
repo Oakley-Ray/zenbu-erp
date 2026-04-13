@@ -16,12 +16,12 @@ const STATUS_LABEL: Record<string, string> = {
   cancelled: '已取消',
 };
 
-const STATUS_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'error' | 'default'> = {
+const STATUS_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'danger' | 'neutral'> = {
   planning: 'info',
   active: 'success',
   on_hold: 'warning',
-  completed: 'default',
-  cancelled: 'error',
+  completed: 'neutral',
+  cancelled: 'danger',
 };
 
 const TABS = [
@@ -74,7 +74,7 @@ export function ProjectDetailPage() {
         <div>
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold text-gray-900">{project.name}</h2>
-            <Badge variant={STATUS_VARIANT[project.status] ?? 'default'}>
+            <Badge variant={STATUS_VARIANT[project.status] ?? 'neutral'}>
               {STATUS_LABEL[project.status] ?? project.status}
             </Badge>
           </div>

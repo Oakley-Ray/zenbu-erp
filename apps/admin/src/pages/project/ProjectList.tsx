@@ -25,12 +25,12 @@ const STATUS_OPTIONS = [
   { value: 'cancelled', label: '已取消' },
 ];
 
-const STATUS_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'error' | 'default'> = {
+const STATUS_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'danger' | 'neutral'> = {
   planning: 'info',
   active: 'success',
   on_hold: 'warning',
-  completed: 'default',
-  cancelled: 'error',
+  completed: 'neutral',
+  cancelled: 'danger',
 };
 
 const STATUS_LABEL: Record<string, string> = {
@@ -71,7 +71,7 @@ export function ProjectListPage() {
       key: 'status',
       title: '狀態',
       render: (r: Project) => (
-        <Badge variant={STATUS_VARIANT[r.status] ?? 'default'}>
+        <Badge variant={STATUS_VARIANT[r.status] ?? 'neutral'}>
           {STATUS_LABEL[r.status] ?? r.status}
         </Badge>
       ),

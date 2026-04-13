@@ -224,7 +224,7 @@ export function CostDashboard({ projectId }: { projectId: string }) {
             entries.map((entry) => (
               <div key={entry.id} className="px-4 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Badge variant="default">{CATEGORY_LABEL[entry.category] ?? entry.category}</Badge>
+                  <Badge variant="neutral">{CATEGORY_LABEL[entry.category] ?? entry.category}</Badge>
                   <span className="text-sm text-gray-900">{entry.description}</span>
                   <span className="text-xs text-gray-400">{formatDate(entry.date)}</span>
                 </div>

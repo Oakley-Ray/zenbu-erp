@@ -196,7 +196,7 @@ export function ResourceAllocation({ projectId }: { projectId: string }) {
             <div key={r.id} className="bg-white rounded-lg border border-gray-200 p-3">
               <div className="flex items-center justify-between">
                 <span className="font-medium text-sm">{r.name}</span>
-                <Badge variant={TYPE_VARIANT[r.type] ?? 'default'}>{TYPE_LABEL[r.type] ?? r.type}</Badge>
+                <Badge variant={TYPE_VARIANT[r.type] ?? 'neutral'}>{TYPE_LABEL[r.type] ?? r.type}</Badge>
               </div>
               <p className="text-xs text-gray-400 mt-1">{formatNTD(r.unitCost)} / {r.unit}</p>
             </div>

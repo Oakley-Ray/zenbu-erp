@@ -44,7 +44,7 @@ const STATUS_LABEL: Record<string, string> = {
   delivered: '已送達',
 };
 
-const STATUS_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'default'> = {
+const STATUS_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'neutral'> = {
   pending: 'warning',
   picked: 'info',
   packed: 'info',
@@ -225,7 +225,7 @@ export function ShipmentPanel({ orderId, orderItems, shippingAddress }: {
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <span className="font-medium text-sm">{s.shipmentNumber}</span>
-                  <Badge variant={STATUS_VARIANT[s.status] ?? 'default'}>
+                  <Badge variant={STATUS_VARIANT[s.status] ?? 'neutral'}>
                     {STATUS_LABEL[s.status] ?? s.status}
                   </Badge>
                 </div>
