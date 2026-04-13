@@ -34,7 +34,7 @@ export const authProvider: AuthProvider = {
         if (payload.tenantId) {
           localStorage.setItem('tenant_id', payload.tenantId);
         }
-      } catch {}
+      } catch { /* token decode is best-effort */ }
 
       return { success: true, redirectTo: '/' };
     } catch {

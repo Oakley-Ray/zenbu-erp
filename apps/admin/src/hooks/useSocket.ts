@@ -35,7 +35,7 @@ export function useSocket() {
         userId: payload.sub,
         tenantId: payload.tenantId,
       });
-    } catch {}
+    } catch { /* token decode may fail for unauthenticated users */ }
 
     return () => {
       // 不斷開共用 socket，只在頁面離開時斷開
@@ -59,5 +59,6 @@ export function useSocket() {
     return () => { socketRef.current.off(event, handler); };
   }, []);
 
-  return { socket: socketRef.current, joinProject, leaveProject, emitTaskUpdate, on };
+  const getSocket = useCallback(() => socketRef.current, []);
+  return { getSocket, joinProject, leaveProject, emitTaskUpdate, on };
 }
