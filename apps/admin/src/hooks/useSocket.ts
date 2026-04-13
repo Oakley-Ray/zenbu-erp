@@ -59,6 +59,6 @@ export function useSocket() {
     return () => { socketRef.current.off(event, handler); };
   }, []);
 
-  const getSocket = useCallback(() => socketRef.current, []);
-  return { getSocket, joinProject, leaveProject, emitTaskUpdate, on };
+  const getSocketInstance = useCallback((): Socket => socketRef.current, []);
+  return { getSocket: getSocketInstance, joinProject, leaveProject, emitTaskUpdate, on };
 }
