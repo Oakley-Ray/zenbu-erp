@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { Card, Button, OrderStatusBadge, PaymentStatusBadge } from '@/components/ui';
 import { useFetch, apiRequest } from '@/hooks/useApi';
+import { ShipmentPanel } from '../shipments/ShipmentPanel';
 
 interface OrderItem {
   id: string;
@@ -116,6 +117,14 @@ export function OrderDetailPage() {
             </Button>
           )}
           {order.status === 'confirmed' && (
+            <Button
+              onClick={() => handleStatusChange('processing')}
+              loading={actionLoading}
+            >
+              開始處理
+            </Button>
+          )}
+          {order.status === 'processing' && (
             <Button
               onClick={() => handleStatusChange('shipped')}
               loading={actionLoading}
@@ -257,6 +266,21 @@ export function OrderDetailPage() {
           </div>
         </div>
       </Card>
+
+      {/* 出貨管理 — 訂單確認後才顯示 */}
+      {['confirmed', 'processing', 'shipped', 'delivered'].includes(order.status) && (
+        <ShipmentPanel
+          orderId={order.id}
+          orderItems={order.items.map((i) => ({
+            id: i.id,
+            productId: (i as any).productId ?? i.id,
+            productName: i.productName,
+            sku: (i as any).sku,
+            quantity: i.quantity,
+          }))}
+          shippingAddress={order.shippingAddress}
+        />
+      )}
     </div>
   );
 }

@@ -20,8 +20,9 @@ export class CreateOrderItemDto {
 }
 
 export class CreateOrderDto {
+  @IsOptional()
   @IsUUID()
-  customerId!: string;
+  customerId?: string;
 
   @IsOptional()
   @IsString()

@@ -11,6 +11,7 @@ import { DashboardPage } from './pages/Dashboard';
 import { ProductListPage } from './pages/products/ProductList';
 import { ProductFormPage } from './pages/products/ProductForm';
 import { OrderListPage } from './pages/orders/OrderList';
+import { OrderFormPage } from './pages/orders/OrderForm';
 import { OrderDetailPage } from './pages/orders/OrderDetail';
 import { InventoryListPage } from './pages/inventory/InventoryList';
 import { CustomerListPage } from './pages/customers/CustomerList';
@@ -50,7 +51,7 @@ function App() {
         resources={[
           { name: 'dashboard', list: '/' },
           { name: 'products', list: '/products', create: '/products/create', edit: '/products/edit/:id' },
-          { name: 'orders', list: '/orders', show: '/orders/:id' },
+          { name: 'orders', list: '/orders', create: '/orders/create', show: '/orders/:id' },
           { name: 'inventory', list: '/inventory' },
           { name: 'customers', list: '/customers' },
           // 採購管理
@@ -91,6 +92,7 @@ function App() {
 
             {/* 訂單管理 */}
             <Route path="orders" element={<OrderListPage />} />
+            <Route path="orders/create" element={<OrderFormPage />} />
             <Route path="orders/:id" element={<OrderDetailPage />} />
 
             {/* 庫存管理 */}

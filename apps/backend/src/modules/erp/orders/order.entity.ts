@@ -26,8 +26,8 @@ export class Order {
   orderNumber!: string;
 
   /** 下單客戶 */
-  @Column('uuid')
-  customerId!: string;
+  @Column('uuid', { nullable: true })
+  customerId?: string;
 
   @Column({ nullable: true })
   customerName?: string;

@@ -117,7 +117,7 @@ export function OrderListPage() {
           <h2 className="text-2xl font-bold text-gray-900">訂單管理</h2>
           <p className="mt-1 text-sm text-gray-500">管理所有客戶訂單</p>
         </div>
-        <div>
+        <div className="flex gap-3">
           <select
             value={statusFilter}
             onChange={(e) => {
@@ -132,6 +132,7 @@ export function OrderListPage() {
               </option>
             ))}
           </select>
+          <Button onClick={() => navigate('/orders/create')}>新增訂單</Button>
         </div>
       </div>
 

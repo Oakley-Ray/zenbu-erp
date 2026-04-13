@@ -30,7 +30,7 @@ export function InventoryListPage() {
   const [page, setPage] = useState(1);
   const [lowStockOnly, setLowStockOnly] = useState(false);
 
-  // Modal state
+  // Adjust modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
   const [adjustType, setAdjustType] = useState<'in' | 'out'>('in');
@@ -38,10 +38,20 @@ export function InventoryListPage() {
   const [adjustRef, setAdjustRef] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
+  // Add stock modal state
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [addProductId, setAddProductId] = useState('');
+  const [addQty, setAddQty] = useState('');
+  const [addWarehouse, setAddWarehouse] = useState('main');
+  const [addNote, setAddNote] = useState('');
+
   const { data, loading, error, refetch } = useFetch<InventoryResponse>(
     `/inventory?page=${page}&limit=20`,
     [page],
   );
+
+  const { data: productsData } = useFetch<any>('/products?limit=200', []);
+  const allProducts: { id: string; name: string; sku?: string }[] = productsData?.data ?? productsData ?? [];
 
   const items = data?.data ?? [];
   const total = data?.total ?? 0;
@@ -87,6 +97,33 @@ export function InventoryListPage() {
       refetch();
     } catch (err) {
       alert((err as Error).message ?? '調整失敗');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  /* ---------- Add stock handler ---------- */
+
+  async function handleAddStock() {
+    if (!addProductId || !addQty) return;
+    const qty = Number(addQty);
+    if (isNaN(qty) || qty <= 0) return;
+
+    setSubmitting(true);
+    try {
+      await apiRequest(`/inventory/${addProductId}/in`, 'POST', {
+        quantity: qty,
+        warehouse: addWarehouse || 'main',
+        note: addNote || '初始入庫',
+      });
+      setAddModalOpen(false);
+      setAddProductId('');
+      setAddQty('');
+      setAddWarehouse('main');
+      setAddNote('');
+      refetch();
+    } catch (err) {
+      alert((err as Error).message ?? '新增失敗');
     } finally {
       setSubmitting(false);
     }
@@ -180,9 +217,12 @@ export function InventoryListPage() {
   return (
     <div>
       {/* Header */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">庫存管理</h2>
-        <p className="mt-1 text-sm text-gray-500">管理所有商品庫存數量與調整紀錄</p>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">庫存管理</h2>
+          <p className="mt-1 text-sm text-gray-500">管理所有商品庫存數量與調整紀錄</p>
+        </div>
+        <Button onClick={() => setAddModalOpen(true)}>新增入庫</Button>
       </div>
 
       {/* Summary + Filter */}
@@ -277,6 +317,75 @@ export function InventoryListPage() {
             </FormField>
           </div>
         )}
+      </Modal>
+
+      {/* Add Stock Modal */}
+      <Modal
+        open={addModalOpen}
+        onClose={() => setAddModalOpen(false)}
+        title="新增入庫"
+        footer={
+          <>
+            <Button variant="secondary" onClick={() => setAddModalOpen(false)}>
+              取消
+            </Button>
+            <Button loading={submitting} onClick={handleAddStock}>
+              確認入庫
+            </Button>
+          </>
+        }
+      >
+        <div className="space-y-4">
+          <FormField label="選擇商品" name="addProduct" required>
+            <select
+              id="addProduct"
+              className={inputClass}
+              value={addProductId}
+              onChange={(e) => setAddProductId(e.target.value)}
+            >
+              <option value="">請選擇商品</option>
+              {allProducts.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name} {p.sku ? `(${p.sku})` : ''}
+                </option>
+              ))}
+            </select>
+          </FormField>
+
+          <FormField label="數量" name="addQty" required>
+            <input
+              id="addQty"
+              type="number"
+              min="1"
+              className={inputClass}
+              placeholder="入庫數量"
+              value={addQty}
+              onChange={(e) => setAddQty(e.target.value)}
+            />
+          </FormField>
+
+          <FormField label="倉庫" name="addWarehouse">
+            <input
+              id="addWarehouse"
+              type="text"
+              className={inputClass}
+              value={addWarehouse}
+              onChange={(e) => setAddWarehouse(e.target.value)}
+              placeholder="main"
+            />
+          </FormField>
+
+          <FormField label="備註" name="addNote">
+            <input
+              id="addNote"
+              type="text"
+              className={inputClass}
+              value={addNote}
+              onChange={(e) => setAddNote(e.target.value)}
+              placeholder="初始入庫 / 採購到貨..."
+            />
+          </FormField>
+        </div>
       </Modal>
     </div>
   );
